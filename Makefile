@@ -34,16 +34,15 @@ cmd:
 
 # Regra para criar um projeto Hyperf: make create-project-hyperf
 create-project-hyperf:
-	@if [ ! -d ./app ]; then \
-	    echo "A pasta 'app' não existe neste diretório."; \
+	@if [ ! -d "./app" ]; then \
+		mkdir app; \
+	fi;
+	if [ -z "$$(ls -A ./app)" ]; then \
+		echo "A pasta 'app' está vazia. Criando um novo projeto Hyperf..."; \
+		make up-build; \
+		docker-compose exec php-swoole-hyperf composer create-project hyperf/hyperf-skeleton .; \
+		make up-build; \
+		echo "Projeto criado com sucesso!"; \
 	else \
-	    if [ -z "$$(ls -A ./app)" ]; then \
-			echo "A pasta 'app' está vazia. Criando um novo projeto Hyperf..."; \
-			make up-build; \
-			docker-compose exec php-swoole-hyperf composer create-project hyperf/hyperf-skeleton .; \
-			make up-build; \
-			echo "Projeto criado com sucesso!"; \
-	    else \
-	        echo "A pasta 'app' já contém um projeto. Nenhuma ação realizada."; \
-	    fi; \
-	fi
+		echo "A pasta 'app' já contém um projeto. Nenhuma ação realizada."; \
+	fi;

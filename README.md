@@ -26,6 +26,7 @@ Você pode criar o projeto Hyperf direto em um únido comando ou rodar PHP Swool
 ### Clonar repositório
 ```shell
 git clone https://github.com/madsonar/setup-create-project-hyperf-framework-php-swoole-digital-codigos.git
+cd setup-create-project-hyperf-framework-php-swoole-digital-codigos/
 ```
 
 ### Comandos Makefile
