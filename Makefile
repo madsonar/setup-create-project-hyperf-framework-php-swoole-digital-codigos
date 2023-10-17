@@ -24,6 +24,7 @@ up-build: init-script
 	@echo "USER_ID: $(UID)"
 	@echo "GROUP_ID: $(GID)"
 	@echo "USER_NAME: $(USER)"
+	@docker rm -f php-swoole-hyperf 2>/dev/null || true
 	@docker-compose build --build-arg UID=$(UID) --build-arg GID=$(GID) --build-arg USER=$(USER)
 	@docker-compose up -d
 	@echo "Docker Compose em modo detached..."
