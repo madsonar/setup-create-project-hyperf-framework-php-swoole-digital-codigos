@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+
+  php-swoole-hyperf:
+    image: php-swoole-hyperf
+    hostname: php-swoole-hyperf
+    container_name: php-swoole-hyperf
+    build:
+      context: ./
+      dockerfile: ./.docker/php/Dockerfile
+    ports:
+      - "9501:9501"
+    volumes:
+      - ./app/:/data/project/
+      - ./.docker/php/ini/php.ini:/etc/php82/php.ini
+      - ./.docker/php/ini/swoole.ini:/etc/php82/conf.d/50_swoole.ini
+      - ./.docker/php/ini/opcache.ini:/etc/php82/conf.d/00_opcache.ini
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - network-digital-codigos
+    
+networks:
+  network-digital-codigos:
+    driver: bridge
+    external: false
+    name: network-digital-codigos
